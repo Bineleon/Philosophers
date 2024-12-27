@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:51:15 by bineleon          #+#    #+#             */
-/*   Updated: 2024/12/23 12:29:27 by bineleon         ###   ########.fr       */
+/*   Updated: 2024/12/25 14:04:46 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_bool  valid_num_args(int ac, char **av)
     }
     else if (ft_atoi(av[2]) <= 0 || ft_atoi(av[3]) <= 0 || ft_atoi(av[4]) <= 0)
     {
-        printf("%sTime to die, eat or sleep should be supperior to 0%s\n", RED, RESET);
+        printf("%sTime to die, eat or sleep should be supperior to 0ms%s\n", RED, RESET);
         return (false);
     }
     else if (ac == 6 && ft_atoi(av[5]) < 0)

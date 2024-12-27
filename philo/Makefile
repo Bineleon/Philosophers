@@ -6,7 +6,7 @@
 #    By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 11:32:17 by bineleon          #+#    #+#              #
-#    Updated: 2024/12/23 12:46:15 by bineleon         ###   ########.fr        #
+#    Updated: 2024/12/27 18:33:41 by bineleon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_MAIN				= main.c
 SRC							= utils.c utils_2.c
 CC							= cc
 RM							= rm -f
-FLAGS						= -Wall -Wextra -Werror -g3
+FLAGS						= -Wall -Wextra -Werror -g3 -pthread
 OBJ_DIR					= obj/
 SRC_DIR					= ./
 
