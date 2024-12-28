@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:48:16 by bineleon          #+#    #+#             */
-/*   Updated: 2024/12/23 12:51:23 by bineleon         ###   ########.fr       */
+/*   Updated: 2024/12/28 20:24:18 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,45 @@ t_bool check_args(int ac, char **av)
     return (true);
 }
 
+void  init_struct(t_data *data, t_philo *philos, pthread_mutex_t *forks, char **av)
+{
+    init_data(data, philos, av, forks);
+    init_philos(data);
+}
+
+void print_init(t_data *data)
+{
+    size_t i;
+
+    i = 0;
+    printf("=== Philo init ===\n");
+    printf("Nbr of philos: %zu\n", data->nbr_of_philos);
+    printf("Time to die: %zu\n", data->time_to_die);
+    printf("Time to eat: %zu\n", data->time_to_eat);
+    printf("Time to sleep: %zu\n", data->time_to_sleep);
+    printf("Nbr of meals: %d\n\n", data->nbr_of_meals);
+    while (i < data->nbr_of_philos)
+    {
+        printf("Philo %d:\n", data->philos[i].id);
+        printf("  Left fork: %d\n", data->philos[i].l_fork_idx);
+        printf("  Right fork: %d\n", data->philos[i].r_fork_idx);
+        printf("  Number of meals: %zu\n", data->philos[i].meal_count);
+        printf("  Time to think: %d\n", data->philos[i].time_to_think);
+        printf("\n");
+        i++;
+    }
+}
+
+
 int main(int ac, char **av)
 {
+    t_data            data;
+    t_philo           philos[201];
+    pthread_mutex_t   forks[201];
+
     if (!check_args(ac, av))
       exit(EXIT_FAILURE);
+    init_struct(&data, philos, forks, av);
+    print_init(&data);
     return (0);
 }

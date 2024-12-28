@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 12:46:38 by bineleon          #+#    #+#             */
-/*   Updated: 2024/12/28 20:07:29 by bineleon         ###   ########.fr       */
+/*   Created: 2024/12/28 20:05:54 by bineleon          #+#    #+#             */
+/*   Updated: 2024/12/28 20:13:40 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
 
-int	ft_putstr_fd(char *s, int fd)
+long int get_current_time(void)
 {
-	if (!s || fd < 0)
-		return (-1);
-	while (*s)
-	{
-		if (write(fd, s, 1) == -1)
-			return (-1);
-		s++;
-	}
-	return (0);
+    struct timeval t;
+
+    if (gettimeofday(&t, NULL) != 0)
+        ft_putstr_fd("error : gettimeofday()\n", 2);
+    return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
-void  print_error(char *str)
+int ft_usleep(size_t sleep_time)
 {
-    ft_putstr_fd(RED, 2);
-    ft_putstr_fd(str, 2);
-    ft_putstr_fd(RESET, 2);
+    long int start_time;
+    long int end_time;
+
+    start_time = get_current_time();
+    end_time = start_time + sleep_time;
+    while (get_current_time() < end_time)
+        usleep(500);
+    return (0);
 }

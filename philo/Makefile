@@ -6,7 +6,7 @@
 #    By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 11:32:17 by bineleon          #+#    #+#              #
-#    Updated: 2024/12/27 18:33:41 by bineleon         ###   ########.fr        #
+#    Updated: 2024/12/28 19:03:59 by bineleon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ RESET			= \e[0m\033[0m
 
 NAME						= philo
 SRC_MAIN				= main.c
-SRC							= utils.c utils_2.c
+SRC							= utils.c utils_2.c init_struct.c
 CC							= cc
 RM							= rm -f
 FLAGS						= -Wall -Wextra -Werror -g3 -pthread
