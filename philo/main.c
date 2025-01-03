@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:48:16 by bineleon          #+#    #+#             */
-/*   Updated: 2024/12/28 20:24:18 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/03 16:02:07 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void print_init(t_data *data)
 
     i = 0;
     printf("=== Philo init ===\n");
-    printf("Nbr of philos: %zu\n", data->nbr_of_philos);
+    printf("nb of philos: %zu\n", data->nb_of_philos);
     printf("Time to die: %zu\n", data->time_to_die);
     printf("Time to eat: %zu\n", data->time_to_eat);
     printf("Time to sleep: %zu\n", data->time_to_sleep);
-    printf("Nbr of meals: %d\n\n", data->nbr_of_meals);
-    while (i < data->nbr_of_philos)
+    printf("nb of meals: %d\n\n", data->nb_of_meals);
+    while (i < data->nb_of_philos)
     {
         printf("Philo %d:\n", data->philos[i].id);
         printf("  Left fork: %d\n", data->philos[i].l_fork_idx);
