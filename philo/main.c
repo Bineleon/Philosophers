@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:48:16 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 16:02:07 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 19:00:50 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool check_args(int ac, char **av)
     }
     if (!valid_args(av))
     {
-        print_error("Numeric arguments requiered%s\n");
+        print_error("Numeric arguments requiered\n");
         return (false);
     }
     if (!valid_num_args(ac, av))
@@ -58,7 +58,6 @@ void print_init(t_data *data)
     }
 }
 
-
 int main(int ac, char **av)
 {
     t_data            data;
@@ -68,6 +67,12 @@ int main(int ac, char **av)
     if (!check_args(ac, av))
       exit(EXIT_FAILURE);
     init_struct(&data, philos, forks, av);
-    print_init(&data);
+    if (init_threads(&data) != 0)
+    {
+        full_clean(&data);
+        return (EXIT_FAILURE);
+    }
+    full_clean(&data);
+    // print_init(&data);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:17:36 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 17:02:27 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:34:34 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void  init_data(t_data *data, t_philo *philos, char **av, pthread_mutex_t *forks
         data->nb_of_meals = -1;
 		data->philos = philos;
     init_forks(data, forks);
+    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    {
+        print_error("Error: pthread_mutex_init()\n");
+        exit(EXIT_FAILURE);
+    }
+    data->start_time = get_time();
     data->forks = forks;
 }
 
@@ -32,14 +38,16 @@ void  init_forks(t_data *data, pthread_mutex_t *forks)
     size_t i;
 
     i = 0;
-    printf("=== Init Forks ===\n");
     while (i < data->nb_of_philos)
     {
-      pthread_mutex_init(&forks[i], NULL);
-      printf("Forks %zu : Initialized\n", i);
-      i++;
+        if (pthread_mutex_init(&forks[i], NULL) != 0)
+        {
+            print_error("Error: pthread_mutex_init()\n");
+            exit(EXIT_FAILURE);
+        }
+        // printf("Forks %zu : Initialized\n", i);
+        i++;
     }
-    printf("\n");
 }
 
 void  init_philos(t_data *data)
@@ -58,6 +66,7 @@ void  init_philos(t_data *data)
             data->philos[i].time_to_think = 0;
         data->philos[i].action = no_action;
         data->philos[i].data = data;
+        data->philos[i].last_meal = get_time();
         i++;
     }
 }

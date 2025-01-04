@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 12:46:38 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 17:58:12 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:32:16 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 void print_status(t_philo *philo, char *status)
 {
-    t_data *data = philo->data;
+    t_data *data;
     const char *color;
 
+    data = philo->data;
     if (ft_strcmp(status, "is eating") == 0)
         color = SMGREEN;
     else if (ft_strcmp(status, "has taken a fork") == 0)
@@ -56,12 +57,11 @@ void print_status(t_philo *philo, char *status)
         color = SMCYAN;
     else if (ft_strcmp(status, "is thinking") == 0)
         color = SMBLUE;
-    else if (ft_strcmp(status, "died") == 0)
+    else if (ft_strcmp(status, "is dead") == 0)
         color = RED;
     else
         color = RESET;
     pthread_mutex_lock(&data->print_lock);
-
     if (!data->end_philo)
     {
         printf("%s", color);

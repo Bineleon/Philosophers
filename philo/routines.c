@@ -6,46 +6,51 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:53:03 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 18:01:01 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:21:44 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
 
-void eat(t_philo *philo)
+void philo_eat(t_philo *philo)
 {
     t_data *data;
 
     data = philo->data;
-    pthread_mutex_lock(&data->forks[philo->r_fork_idx]);
+    if (mutex_lock(&data->forks[philo->r_fork_idx]) != 0)
+        return;
     print_status(philo, "has taken a fork");
     if (data->nb_of_philos == 1)
     {
         ft_usleep(data->time_to_die);
-        pthread_mutex_unlock(&data->forks[philo->r_fork_idx]);
+        mutex_unlock(&data->forks[philo->r_fork_idx]);
         return;
     }
-    pthread_mutex_lock(&data->forks[philo->l_fork_idx]);
+    if (mutex_lock(&data->forks[philo->l_fork_idx]) != 0)
+    {
+        mutex_unlock(&data->forks[philo->r_fork_idx]);
+        return;
+    }
     print_status(philo, "has taken a fork");
-    philo->action = eating;
+    philo->action = eat;
     philo->last_meal = get_time();
     print_status(philo, "is eating");
     ft_usleep(data->time_to_eat);
     philo->meal_count++;
-    pthread_mutex_unlock(&data->forks[philo->l_fork_idx]);
-    pthread_mutex_unlock(&data->forks[philo->r_fork_idx]);
+    mutex_unlock(&data->forks[philo->l_fork_idx]);
+    mutex_unlock(&data->forks[philo->r_fork_idx]);
 }
 
-void sleep_philo(t_philo *philo)
+void philo_sleep(t_philo *philo)
 {
-    philo->action = sleeping;
+    philo->action = sleepy;
     print_status(philo, "is sleeping");
     ft_usleep(philo->data->time_to_sleep);
 }
 
-void think(t_philo *philo)
+void philo_think(t_philo *philo)
 {
-    philo->action = thinking;
+    philo->action = think;
     print_status(philo, "is thinking");
     ft_usleep(philo->time_to_think);
 }
@@ -59,9 +64,9 @@ void *philo_routine(void *arg)
 		    ft_usleep(philo->data->time_to_eat - 100);
     while (!philo->data->end_philo)
     {
-        eat(philo);
-        sleep_philo(philo);
-        think(philo);
+        philo_eat(philo);
+        philo_sleep(philo);
+        philo_think(philo);
     }
     return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:20:43 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 18:01:44 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:10:57 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ typedef enum e_bool
 typedef enum e_action
 {
   no_action,
-	eating,
-	sleeping,
-	thinking,
+	eat,
+	sleepy,
+	think,
+  taken_fork,
 	dead
 }			t_action;
 
@@ -67,6 +68,7 @@ typedef struct s_data
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		print_lock;
 	t_philo						*philos;
+  pthread_t         monitor;
 
 }					t_data;
 
@@ -84,15 +86,34 @@ t_bool    valid_num_args(int ac, char **av);
 void      print_error(char *str);
 int       ft_putstr_fd(char *s, int fd);
 void      print_status(t_philo *philo, char *status);
+void      full_clean(t_data *data);
 
 /* Time */
 
 int       ft_usleep(size_t sleep_time);
 long int  get_time(void);
 
+/* Safe */
+
+int mutex_lock(pthread_mutex_t *mutex);
+int mutex_unlock(pthread_mutex_t *mutex);
+int mutex_destroy(pthread_mutex_t *mutex);
+int thread_create(pthread_t *thread, void *(*routine)(void *), void *arg);
+int thread_join(pthread_t thread);
+
 /* Init struct */
 
 void      init_forks(t_data *data, pthread_mutex_t *forks);
 void      init_data(t_data *data, t_philo *philos, char **av, pthread_mutex_t *forks);
 void      init_philos(t_data *data);
+
+/* Routines */
+
+void *monitor_routine(void *arg);
+void *philo_routine(void *arg);
+
+/* Threads */
+
+int init_threads(t_data *data);
+
 #endif

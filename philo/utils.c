@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:51:15 by bineleon          #+#    #+#             */
-/*   Updated: 2024/12/25 14:04:46 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/04 15:21:28 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_bool    is_num(char *str)
       i++;
     }
     return (true);
-
 }
 
 t_bool  valid_num_args(int ac, char **av)

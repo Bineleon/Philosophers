@@ -6,7 +6,7 @@
 #    By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 11:32:17 by bineleon          #+#    #+#              #
-#    Updated: 2025/01/03 17:58:42 by bineleon         ###   ########.fr        #
+#    Updated: 2025/01/04 19:08:43 by bineleon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,11 @@ RESET			= \e[0m\033[0m
 
 NAME						= philo
 SRC_MAIN				= main.c
-SRC							= utils.c utils_2.c init_struct.c time.c routines.c threads.c
+SRC							= utils.c utils_2.c init_struct.c time.c routines.c threads.c\
+								monitor.c safe.c clean.c
 CC							= cc
 RM							= rm -f
-FLAGS						= -Wall -Wextra -Werror -g3 -pthread
+FLAGS						= -Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
 OBJ_DIR					= obj/
 SRC_DIR					= ./
 
