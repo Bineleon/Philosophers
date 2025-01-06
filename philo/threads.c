@@ -6,11 +6,25 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:11:34 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 16:49:52 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:19:22 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
+
+void    philo_sleep(t_philo *philo)
+{
+    philo->action = sleepy;
+    print_status(philo, "is sleeping");
+    ft_usleep(philo->data->time_to_sleep);
+}
+
+void    philo_think(t_philo *philo)
+{
+    philo->action = think;
+    print_status(philo, "is thinking");
+    ft_usleep(philo->time_to_think);
+}
 
 void *philo_routine(void *arg)
 {

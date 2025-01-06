@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:17:36 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 15:12:18 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:03:32 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void  init_data(t_data *data, t_philo *philos, char **av, pthread_mutex_t *forks
 		data->time_to_die = ft_atoi(av[2]);
 		data->time_to_eat = ft_atoi(av[3]);
 		data->time_to_sleep = ft_atoi(av[4]);
+
     if (av[5])
 		    data->nb_of_meals = ft_atoi(av[5]);
     else
         data->nb_of_meals = -1;
 		data->philos = philos;
+    data->end_philo = false;
     init_forks(data, forks);
     if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
     {

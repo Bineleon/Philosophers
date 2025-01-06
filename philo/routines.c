@@ -6,13 +6,13 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:53:03 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 17:31:47 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:39:23 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
 
-void  assign_fork(t_philo *philo, int *first_fork, int *sd_fork)
+void    assign_fork(t_philo *philo, int *first_fork, int *sd_fork)
 {
     if (philo->l_fork_idx < philo->r_fork_idx)
     {
@@ -26,7 +26,7 @@ void  assign_fork(t_philo *philo, int *first_fork, int *sd_fork)
     }
 }
 
-t_bool single_philo(t_data *data, t_philo *philo, int first_fork)
+t_bool    single_philo(t_data *data, t_philo *philo, int first_fork)
 {
     if (data->nb_of_philos == 1)
     {
@@ -38,7 +38,14 @@ t_bool single_philo(t_data *data, t_philo *philo, int first_fork)
     return (false);
 }
 
-void philo_eat(t_philo *philo)
+void    close_mutex(t_philo *philo, t_data *data, int sd_fork, int first_fork)
+{
+    mutex_unlock(&philo->meal);
+    mutex_unlock(&data->forks[sd_fork]);
+    mutex_unlock(&data->forks[first_fork]);
+}
+
+void    philo_eat(t_philo *philo)
 {
     t_data *data;
     int first_fork;
@@ -64,21 +71,5 @@ void philo_eat(t_philo *philo)
     ft_usleep(data->time_to_eat);
     mutex_lock(&philo->meal);
     philo->meal_count++;
-    mutex_unlock(&philo->meal);
-    mutex_unlock(&data->forks[sd_fork]);
-    mutex_unlock(&data->forks[first_fork]);
-}
-
-void philo_sleep(t_philo *philo)
-{
-    philo->action = sleepy;
-    print_status(philo, "is sleeping");
-    ft_usleep(philo->data->time_to_sleep);
-}
-
-void philo_think(t_philo *philo)
-{
-    philo->action = think;
-    print_status(philo, "is thinking");
-    ft_usleep(philo->time_to_think);
+    close_mutex(philo, data, sd_fork, first_fork);
 }
