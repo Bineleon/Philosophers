@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:11:34 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:20:57 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:06:52 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int init_threads(t_data *data)
             return (-1);
         i++;
     }
+    thread_join(data->monitor);
+    clean_philo(data);
     return (0);
 }

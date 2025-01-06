@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:20:43 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:10:57 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:34:13 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct s_philo
 	size_t					meal_count;
   size_t					last_meal;
 	t_action				action;
+  pthread_mutex_t	meal;
 	pthread_t				philo;
+
   struct s_data		*data;
 
 }									t_philo;
@@ -87,6 +89,7 @@ void      print_error(char *str);
 int       ft_putstr_fd(char *s, int fd);
 void      print_status(t_philo *philo, char *status);
 void      full_clean(t_data *data);
+int       clean_philo(t_data *data);
 
 /* Time */
 

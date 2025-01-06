@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:53:03 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:21:44 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:09:02 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void philo_eat(t_philo *philo)
     }
     print_status(philo, "has taken a fork");
     philo->action = eat;
+    mutex_lock(&philo->meal);
     philo->last_meal = get_time();
+    mutex_unlock(&philo->meal);
     print_status(philo, "is eating");
     ft_usleep(data->time_to_eat);
     philo->meal_count++;
@@ -61,7 +63,7 @@ void *philo_routine(void *arg)
 
     philo = (t_philo *)arg;
     if (philo->id % 2 == 0)
-		    ft_usleep(philo->data->time_to_eat - 100);
+		    ft_usleep(100);
     while (!philo->data->end_philo)
     {
         philo_eat(philo);

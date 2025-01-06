@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:17:36 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:34:34 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:42:03 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void  init_philos(t_data *data)
             data->philos[i].time_to_think = 0;
         data->philos[i].action = no_action;
         data->philos[i].data = data;
+        if (pthread_mutex_init(&data->philos[i].meal, NULL) != 0)
+        {
+            print_error("Error: pthread_mutex_init()\n");
+            exit(EXIT_FAILURE);
+        }
         data->philos[i].last_meal = get_time();
         i++;
     }

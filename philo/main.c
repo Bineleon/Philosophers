@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:48:16 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 19:00:50 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:49:34 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,41 @@ void print_init(t_data *data)
     }
 }
 
+void test_ft_usleep(void)
+{
+    long start, end, diff;
+
+    printf("Testing ft_usleep...\n");
+
+    start = get_time();
+    ft_usleep(100); // Pause de 100 ms
+    end = get_time();
+
+    diff = end - start;
+
+    printf("DEBUG: Expected sleep time = 100ms, Actual sleep time = %ldms\n", diff);
+
+    start = get_time();
+    ft_usleep(1000); // Pause de 1000 ms
+    end = get_time();
+
+    diff = end - start;
+
+    printf("DEBUG: Expected sleep time = 1000ms, Actual sleep time = %ldms\n", diff);
+}
+
+
 int main(int ac, char **av)
 {
+    printf("MAIN\n");
+    fflush(stdout);
     t_data            data;
     t_philo           philos[201];
     pthread_mutex_t   forks[201];
 
     if (!check_args(ac, av))
       exit(EXIT_FAILURE);
+    // test_ft_usleep();
     init_struct(&data, philos, forks, av);
     if (init_threads(&data) != 0)
     {

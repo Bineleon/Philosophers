@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 12:46:38 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:32:16 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:18:34 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void print_status(t_philo *philo, char *status)
 {
     t_data *data;
     const char *color;
+    long current_time;
 
     data = philo->data;
     if (ft_strcmp(status, "is eating") == 0)
@@ -61,11 +62,14 @@ void print_status(t_philo *philo, char *status)
         color = RED;
     else
         color = RESET;
+    current_time = get_time();
+    if (current_time < data->start_time)
+        current_time = data->start_time;
     pthread_mutex_lock(&data->print_lock);
     if (!data->end_philo)
     {
         printf("%s", color);
-        printf("%ld %d %s\n", get_time() - data->start_time, philo->id, status);
+        printf("%ld\t%d\t%s\n", get_time() - data->start_time, philo->id, status);
         printf(RESET);
     }
     pthread_mutex_unlock(&data->print_lock);

@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:17:54 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 18:11:55 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:44:36 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,22 @@ void clean_forks(t_data *data)
         i++;
     }
 }
+
+void clean_meal(t_data *data)
+{
+    size_t i;
+
+    i = 0;
+    while (i < data->nb_of_philos)
+    {
+        mutex_destroy(&data->philos[i].meal);
+        i++;
+    }
+}
+
 void full_clean(t_data *data)
 {
-    thread_join(data->monitor);
-    clean_philo(data);
     clean_forks(data);
     mutex_destroy(&data->print_lock);
+    clean_meal(data);
 }

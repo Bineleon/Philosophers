@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:05:54 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/03 17:20:47 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 10:56:20 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ long int get_time(void)
     struct timeval t;
 
     if (gettimeofday(&t, NULL) != 0)
+    {
         ft_putstr_fd("error : gettimeofday()\n", 2);
+        return (-1);
+    }
     return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
@@ -29,6 +32,6 @@ int ft_usleep(size_t sleep_time)
     start_time = get_time();
     end_time = start_time + sleep_time;
     while (get_time() < end_time)
-        usleep(500);
+        usleep(100);
     return (0);
 }
