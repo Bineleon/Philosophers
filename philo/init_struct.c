@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:17:36 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 11:42:03 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:12:18 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@ void  init_data(t_data *data, t_philo *philos, char **av, pthread_mutex_t *forks
         data->nb_of_meals = -1;
 		data->philos = philos;
     init_forks(data, forks);
-    if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+    if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+    {
+        print_error("Error: pthread_mutex_init()\n");
+        exit(EXIT_FAILURE);
+    }
+    if (pthread_mutex_init(&data->end_mutex, NULL) != 0)
     {
         print_error("Error: pthread_mutex_init()\n");
         exit(EXIT_FAILURE);
     }
     data->start_time = get_time();
     data->forks = forks;
+    // printf("DEBUG: Pointer to philos = %p\n", (void *)data->philos);
 }
 
 void  init_forks(t_data *data, pthread_mutex_t *forks)

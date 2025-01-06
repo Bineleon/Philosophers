@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:17:54 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 11:44:36 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:50:57 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void clean_meal(t_data *data)
 void full_clean(t_data *data)
 {
     clean_forks(data);
-    mutex_destroy(&data->print_lock);
+    mutex_destroy(&data->print_mutex);
+    mutex_destroy(&data->end_mutex);
     clean_meal(data);
 }

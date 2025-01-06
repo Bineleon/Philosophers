@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 12:46:38 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 12:18:34 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:39:13 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,17 @@ void print_status(t_philo *philo, char *status)
     current_time = get_time();
     if (current_time < data->start_time)
         current_time = data->start_time;
-    pthread_mutex_lock(&data->print_lock);
+    if (mutex_lock(&data->print_mutex) != 0)
+        return;
+    if (pthread_mutex_lock(&data->end_mutex) != 0)
+        return;
     if (!data->end_philo)
     {
+        mutex_unlock(&data->end_mutex);
         printf("%s", color);
-        printf("%ld\t%d\t%s\n", get_time() - data->start_time, philo->id, status);
-        printf(RESET);
+        printf("%ld\t%d\t%s%s\n", get_time() - data->start_time, philo->id, status, RESET);
     }
-    pthread_mutex_unlock(&data->print_lock);
+    else
+        mutex_unlock(&data->end_mutex);
+    mutex_unlock(&data->print_mutex);
 }

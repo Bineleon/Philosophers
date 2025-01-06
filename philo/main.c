@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:48:16 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 11:49:34 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:52:41 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ t_bool check_args(int ac, char **av)
 
 void  init_struct(t_data *data, t_philo *philos, pthread_mutex_t *forks, char **av)
 {
+    // printf("DEBUG: Before init_data: Pointer to philos = %p\n", (void *)philos);
     init_data(data, philos, av, forks);
+    // printf("DEBUG: After init_data: Pointer to data->philos = %p\n", (void *)data->philos);
     init_philos(data);
 }
 
@@ -84,8 +86,6 @@ void test_ft_usleep(void)
 
 int main(int ac, char **av)
 {
-    printf("MAIN\n");
-    fflush(stdout);
     t_data            data;
     t_philo           philos[201];
     pthread_mutex_t   forks[201];

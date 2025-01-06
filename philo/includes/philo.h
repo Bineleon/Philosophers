@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:20:43 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 11:34:13 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:57:20 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 
 }									t_philo;
 
+
 typedef struct s_data
 {
 
@@ -68,7 +69,8 @@ typedef struct s_data
 	size_t						time_to_eat;
 	size_t						time_to_sleep;
 	pthread_mutex_t		*forks;
-	pthread_mutex_t		print_lock;
+	pthread_mutex_t		print_mutex;
+  pthread_mutex_t   end_mutex;
 	t_philo						*philos;
   pthread_t         monitor;
 
