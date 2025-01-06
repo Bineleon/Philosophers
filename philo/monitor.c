@@ -6,39 +6,18 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:50 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 15:30:44 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 16:50:15 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
 
-// void  check_if_dead(t_data *data)
-// {
-//     size_t  i;
-
-//     i = 0;
-//     while (i < data->nb_of_philos)
-//     {
-//         mutex_lock(&data->philos[i].meal);
-//         if ((get_time() - data->philos[i].last_meal) > data->time_to_die)
-//         {
-//             print_status(&data->philos[i], "is dead");
-//             mutex_lock(&data->end_mutex);
-//             data->end_philo = true;
-//             mutex_unlock(&data->end_mutex);
-//             mutex_unlock(&data->philos[i].meal);
-//             return;
-//         }
-//         mutex_unlock(&data->philos[i].meal);
-//         i++;
-//     }
-// }
-
 void check_if_dead(t_data *data)
 {
-    size_t i;
+    size_t  i;
 
-    for (i = 0; i < data->nb_of_philos; i++)
+    i = 0;
+    while (i < data->nb_of_philos)
     {
         mutex_lock(&data->philos[i].meal);
         if ((get_time() - data->philos[i].last_meal) > data->time_to_die)
@@ -51,9 +30,9 @@ void check_if_dead(t_data *data)
             return;
         }
         mutex_unlock(&data->philos[i].meal);
+        i++;
     }
 }
-
 
 void  check_if_full(t_data *data)
 {
@@ -92,25 +71,9 @@ void *monitor_routine(void *arg)
             break;
         }
         mutex_unlock(&data->end_mutex);
-
         check_if_dead(data);
         check_if_full(data);
-        usleep(1000);
+        usleep(500);
     }
     return (NULL);
 }
-
-// void *monitor_routine(void *arg)
-// {
-//     t_data *data;
-
-//     data = (t_data *)arg;
-//     // printf("DEBUG: Monitor starting at time %ld\n", get_time());
-//     while (!data->end_philo)
-//     {
-//         check_if_dead(data);
-//         check_if_full(data);
-//         usleep(1000);
-//     }
-//     return (NULL);
-// }

@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 10:20:43 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 14:57:20 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 16:54:42 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ void      init_philos(t_data *data);
 /* Routines */
 
 void *monitor_routine(void *arg);
+void  philo_eat(t_philo *philo);
+void philo_sleep(t_philo *philo);
+void philo_think(t_philo *philo);
 void *philo_routine(void *arg);
 
 /* Threads */
