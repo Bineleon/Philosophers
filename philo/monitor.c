@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:02:50 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 16:50:15 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:22:43 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void  check_if_full(t_data *data)
     {
         while (i < data->nb_of_philos)
         {
+            mutex_lock(&data->philos[i].meal);
             if (data->philos[i].meal_count >= (size_t)data->nb_of_meals)
                 count++;
+            mutex_unlock(&data->philos[i].meal);
             i++;
         }
         if (count == data->nb_of_philos)
