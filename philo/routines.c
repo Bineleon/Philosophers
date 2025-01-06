@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:53:03 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 17:39:23 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:51:58 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_bool    single_philo(t_data *data, t_philo *philo, int first_fork)
 
 void    close_mutex(t_philo *philo, t_data *data, int sd_fork, int first_fork)
 {
-    mutex_unlock(&philo->meal);
+    mutex_unlock(&philo->meal_mutex);
     mutex_unlock(&data->forks[sd_fork]);
     mutex_unlock(&data->forks[first_fork]);
 }
@@ -64,12 +64,12 @@ void    philo_eat(t_philo *philo)
         return;
     }
     print_status(philo, "has taken a fork");
-    mutex_lock(&philo->meal);
+    mutex_lock(&philo->meal_mutex);
     philo->last_meal = get_time();
-    mutex_unlock(&philo->meal);
+    mutex_unlock(&philo->meal_mutex);
     print_status(philo, "is eating");
     ft_usleep(data->time_to_eat);
-    mutex_lock(&philo->meal);
+    mutex_lock(&philo->meal_mutex);
     philo->meal_count++;
     close_mutex(philo, data, sd_fork, first_fork);
 }

@@ -6,7 +6,7 @@
 /*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:17:54 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/06 18:15:49 by bineleon         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:52:21 by bineleon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int clean_meal(t_data *data)
     i = 0;
     while (i < data->nb_of_philos)
     {
-        if (mutex_destroy(&data->philos[i].meal) != 0)
+        if (mutex_destroy(&data->philos[i].meal_mutex) != 0)
             return (-1);
         i++;
     }
