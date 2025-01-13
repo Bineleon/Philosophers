@@ -3,27 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+         #
+#    By: neleon <neleon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 11:32:17 by bineleon          #+#    #+#              #
-#    Updated: 2025/01/06 12:36:14 by bineleon         ###   ########.fr        #
+#    Updated: 2025/01/09 21:28:40 by neleon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GREEN			= \033[0;32m\e[1m
 RESET			= \e[0m\033[0m
 
-NAME						= philo
-SRC_MAIN				= main.c
-SRC							= utils.c utils_2.c init_struct.c time.c routines.c threads.c\
-								monitor.c safe.c clean.c
-CC							= cc
-RM							= rm -f
-FLAGS						= -Wall -Wextra -Werror -g3 -pthread
-OBJ_DIR					= obj/
-SRC_DIR					= ./
+NAME			= philo
+SRC_MAIN		= main.c
+SRC				= utils.c utils_2.c init_struct.c time.c routines.c threads.c\
+				monitor.c safe.c clean.c utils_itoa.c
+CC				= cc
+RM				= rm -f
+FLAGS			= -Wall -Wextra -Werror -g3 -pthread
+OBJ_DIR			= obj/
+SRC_DIR			= ./
 
-OBJ 						= ${addprefix ${OBJ_DIR},${SRC:.c=.o}}
+OBJ 			= ${addprefix ${OBJ_DIR},${SRC:.c=.o}}
 MAIN_OBJ        = ${addprefix ${OBJ_DIR},${SRC_MAIN:.c=.o}}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c

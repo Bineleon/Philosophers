@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bineleon <neleon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: neleon <neleon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 10:51:15 by bineleon          #+#    #+#             */
-/*   Updated: 2025/01/04 15:21:28 by bineleon         ###   ########.fr       */
+/*   Created: 2025/01/09 20:46:34 by neleon            #+#    #+#             */
+/*   Updated: 2025/01/09 20:46:37 by neleon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,56 +19,58 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-t_bool    is_num(char *str)
+t_bool	is_num(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
-        return (false);
-    i++;
-    while (str[i])
-    {
-      if (!ft_isdigit(str[i]))
-          return (false);
-      i++;
-    }
-    return (true);
+	i = 0;
+	if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
+		return (false);
+	i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-t_bool  valid_num_args(int ac, char **av)
+t_bool	valid_num_args(int ac, char **av)
 {
-    if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > 200)
-    {
-        printf("%sNumber of philos should be between 1 and 200%s\n", RED, RESET);
-        return (false);
-    }
-    else if (ft_atoi(av[2]) <= 0 || ft_atoi(av[3]) <= 0 || ft_atoi(av[4]) <= 0)
-    {
-        printf("%sTime to die, eat or sleep should be supperior to 0ms%s\n", RED, RESET);
-        return (false);
-    }
-    else if (ac == 6 && ft_atoi(av[5]) < 0)
-    {
-        printf("%sNumbers of meals should be supperior or equal to 0%s\n", RED, RESET);
-        return (false);
-    }
-    return (true);
-
+	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[1]) > 200)
+	{
+		printf("%sNumber of philos should be between 1 and 200%s\n", RED,
+			RESET);
+		return (false);
+	}
+	else if (ft_atoi(av[2]) <= 0 || ft_atoi(av[3]) <= 0 || ft_atoi(av[4]) <= 0)
+	{
+		printf("%sTime to die, eat or sleep should be supperior to 0ms%s\n",
+			RED, RESET);
+		return (false);
+	}
+	else if (ac == 6 && ft_atoi(av[5]) < 0)
+	{
+		printf("%sNumbers of meals should be supperior or equal to 0%s\n", RED,
+			RESET);
+		return (false);
+	}
+	return (true);
 }
 
-t_bool    valid_args(char **av)
+t_bool	valid_args(char **av)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    while (av[i])
-    {
-        if (!is_num(av[i]))
-            return (false);
-        i++;
-    }
-    return (true);
+	i = 1;
+	while (av[i])
+	{
+		if (!is_num(av[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 long	ft_atoi(const char *nptr)
